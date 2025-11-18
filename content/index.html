@@ -1,8 +1,20 @@
-[!- extends "_wrappers/main.html" -!]
-
+[!- extends "_wrappers/wrapper.html" -!]
 [!- block main -!]
+  <hgroup>
+    <h1>The Scratchpad of Alan</h1>
+    <div class="page-subtitle">
+      a place to mess with things
+    </div>
+  </hgroup>
 
-<p>Hello, world</p>
+  <h2>Pages</h2>
+
+<ul>
+[! for folder in folders !]
+  [! if folder.parent == "pages" !]
+  <li><a href="/pages/[@ folder.name @]/">[@ folder.name @]</a></li>
+  [! endif !]
+[! endfor !]
+</ul>
 
 [!- endblock -!]
-
