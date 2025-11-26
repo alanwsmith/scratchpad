@@ -1,0 +1,39 @@
+[!- extends "_wrappers/wrapper.html" -!]
+[!- block main -!]
+  <hgroup>
+    <h1>Append Child Test</h1>
+  </hgroup>
+
+<p>This is a test to check to make sure
+  appendChild is working in an expected
+  synchronous way</p>
+
+<div id="target"></div>
+<script>
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function doIt() {
+  const el = document.querySelector("#target");
+  for (let i = 0; i < 100000; i += 1) {
+    const skeleton = document.createElement("template");
+    skeleton.innerHTML = `<span class="ping">x </span>`;
+    const newEl = skeleton.content.cloneNode(true);
+    el.appendChild(newEl);
+  }
+  const check = document.querySelectorAll(".ping")[99999];
+  //await sleep(1000);
+  console.log(check.innerHTML);
+  //console.log(check);
+}
+
+doIt();
+
+</script>
+
+
+[!- endblock -!]
+
+

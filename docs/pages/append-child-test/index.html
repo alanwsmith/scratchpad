@@ -1969,18 +1969,37 @@ hgroup {
 </header>
       <main class="default-wrapper">
 <hgroup>
-    <h1>The Scratchpad of Alan</h1>
-    <div class="page-subtitle">
-      a place to mess with things
-    </div>
+    <h1>Append Child Test</h1>
   </hgroup>
 
-  <h2>Pages</h2>
+<p>This is a test to check to make sure
+  appendChild is working in an expected
+  synchronous way</p>
 
-<ul>
-  <li><a href="/pages/append-child-test/">append-child-test</a></li>
-  <li><a href="/pages/multi-range-slider/">multi-range-slider</a></li>
-</ul>      </main>
+<div id="target"></div>
+<script>
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function doIt() {
+  const el = document.querySelector("#target");
+  for (let i = 0; i < 100000; i += 1) {
+    const skeleton = document.createElement("template");
+    skeleton.innerHTML = `<span class="ping">x </span>`;
+    const newEl = skeleton.content.cloneNode(true);
+    el.appendChild(newEl);
+  }
+  const check = document.querySelectorAll(".ping")[99999];
+  //await sleep(1000);
+  console.log(check.innerHTML);
+  //console.log(check);
+}
+
+doIt();
+
+</script>      </main>
 
 <footer>
   <div class="small-font">
